@@ -123,6 +123,7 @@ func main() {
 			// Send the Bubble Tea program a message from outside the program.
 			p.Send(resultMsg{food: randomFood(), duration: pause})
 		}
+		time.Sleep(time.Second * 3)
 	}()
 
 	<-done
