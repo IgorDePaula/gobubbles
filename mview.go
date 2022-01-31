@@ -39,11 +39,13 @@ var (
 var titleStyle = lipgloss.NewStyle().Padding(0, 4).Bold(true).Background(lipgloss.Color("#4169E1")).Foreground(lipgloss.Color("#00FA9A")).MarginBottom(1)
 
 func main() {
+
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FA9A"))
 	initialModel := model{0, false, 10, 0, 0, false, false, s}
 	p := tea.NewProgram(initialModel)
+
 	if err := p.Start(); err != nil {
 		fmt.Println("could not start program:", err)
 	}
@@ -197,6 +199,13 @@ func choicesView(m model) string {
 
 	return fmt.Sprintf(tpl, choices)
 }
+func worker(m model) {
+	fmt.Print("working...")
+	time.Sleep(time.Second * 3)
+	fmt.Println("done")
+	m.Quitting = true
+	m.Choice = -1
+}
 
 // The second view, after a task has been chosen
 func chosenView(m model) string {
@@ -206,6 +215,7 @@ func chosenView(m model) string {
 	switch m.Choice {
 	case 0:
 		msg = fmt.Sprintf("Instalando dependências...")
+		worker(m)
 	case 1:
 		msg = fmt.Sprintf("Executando migrate com seeders")
 	}
@@ -215,7 +225,6 @@ func chosenView(m model) string {
 		label = fmt.Sprintf("Downloaded. Exiting in %s seconds...", colorFg(strconv.Itoa(m.Ticks), "79"))
 	}*/
 
-	m.spinner.Start()
 	return msg + "\n\n" + label + m.spinner.View()
 }
 
