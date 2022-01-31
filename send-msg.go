@@ -116,14 +116,15 @@ func main() {
 
 	// Simulate activity
 	go func() {
-		for {
+		/*for {
 			pause := time.Duration(rand.Int63n(899)+100) * time.Millisecond
 			time.Sleep(pause)
 
 			// Send the Bubble Tea program a message from outside the program.
 			p.Send(resultMsg{food: randomFood(), duration: pause})
-		}
+		}*/
 		time.Sleep(time.Second * 3)
+		p.Send(resultMsg{food: "logado", duration: 300})
 	}()
 
 	<-done
