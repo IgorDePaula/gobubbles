@@ -36,7 +36,7 @@ var (
 	// Gradient colors we'll use for the progress bar
 	ramp = makeRamp("#B14FFF", "#00FFA3", progressBarWidth)
 )
-var titleStyle = lipgloss.NewStyle().Padding(0, 4).Bold(true).Background(lipgloss.Color("#4169E1")).Foreground(lipgloss.Color("#00FA9A")).MarginBottom(1)
+var titleStyle2 = lipgloss.NewStyle().Padding(0, 4).Bold(true).Background(lipgloss.Color("#4169E1")).Foreground(lipgloss.Color("#00FA9A")).MarginBottom(1)
 
 func main() {
 
@@ -187,7 +187,7 @@ func updateChosen(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 func choicesView(m model) string {
 	c := m.Choice
 
-	tpl := titleStyle.Render("Assistente de deploy")
+	tpl := titleStyle2.Render("Assistente de deploy")
 	tpl += "%s\n\n"
 	tpl += subtle("up/down: Selecionar") + dot + subtle("enter: Escolher") + dot + subtle("esc: Sair")
 
